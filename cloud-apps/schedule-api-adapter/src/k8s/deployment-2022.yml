@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-adapter-2022
+  namespace: schedule-api-adapter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: api-adapter-2022
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: api-adapter-2022
+    spec:
+      containers:
+        - name: schedule-api-adapter
+          image: ghcr.io/dannixon/emfcamp-schedule-api-adapter:e90cec9dc0414183658eb915ec60442e119b820b
+          env:
+            - name: RUST_LOG
+              value: info
+            - name: UPSTREAM_API_URL
+              value: https://www.emfcamp.org/schedule/2022.json
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-2022
+  namespace: schedule-api-adapter
+spec:
+  selector:
+    app.kubernetes.io/name: api-adapter-2022
+  ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: http

@@ -1,0 +1,19 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tls-cert
+  namespace: schedule-api-adapter
+spec:
+  secretName: tls-cert
+  duration: 2160h # 90d
+  renewBefore: 720h # 30d
+  privateKey:
+    rotationPolicy: Always
+  issuerRef:
+    name: letsencrypt-cloudflare-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - schedule.emfcamp.dan-nixon.com
+    - 2024.schedule.emfcamp.dan-nixon.com
+    - 2022.schedule.emfcamp.dan-nixon.com

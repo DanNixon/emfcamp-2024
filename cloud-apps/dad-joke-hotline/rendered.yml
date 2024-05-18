@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ghcr.io/dannixon/dad-joke-hotline:ed693767d31cc52b4d1a1408adc89def85d548d0
+          image: ghcr.io/dannixon/dad-joke-hotline:78992b8f28d26bb856d801f4be7242d031bde5c7
           env:
             - name: RUST_LOG
               value: info

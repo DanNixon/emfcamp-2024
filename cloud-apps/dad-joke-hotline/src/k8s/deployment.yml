@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: dad-joke-hotline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/dannixon/dad-joke-hotline:ed693767d31cc52b4d1a1408adc89def85d548d0
+          env:
+            - name: RUST_LOG
+              value: info
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http
+  namespace: dad-joke-hotline
+spec:
+  selector:
+    app.kubernetes.io/name: backend
+  ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: http

@@ -1,0 +1,51 @@
+#
+# This is a generated file!
+#
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dapnet-creds
+  namespace: dapnet-schedule-announcer
+type: Opaque
+stringData:
+  password: "ref+sops://src/secrets.yml#/dapnet_password"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: announcer
+  namespace: dapnet-schedule-announcer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: announcer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: announcer
+    spec:
+      containers:
+        - name: announcer
+          image: ghcr.io/dannixon/emfcamp-dapnet-schedule-announcer:c77de7c9d3b56a9b446a39e7c09b7b676a323b41
+          env:
+            - name: RUST_LOG
+              value: info
+            - name: API_URL
+              value: http://http-2024.schedule-api-adapter.svc.cluster.local:8000/schedule
+            - name: PRE_EVENT_ANNOUNCEMENT_TIME
+              value: "120"
+            - name: DAPNET_USERNAME
+              value: m0nxn
+            - name: DAPNET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dapnet-creds
+                  key: password
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dapnet-schedule-announcer

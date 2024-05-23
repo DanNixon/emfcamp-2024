@@ -2771,9 +2771,9 @@ spec:
     app.kubernetes.io/name: traefik
     app.kubernetes.io/instance: traefik-traefik
   ports:
-  - port: 1883
-    name: "mqtt"
-    targetPort: mqtt
+  - port: 18831
+    name: "mqtt-18831"
+    targetPort: mqtt-18831
     protocol: TCP
   - port: 80
     name: "web"
@@ -2853,8 +2853,8 @@ spec:
         - name: "metrics"
           containerPort: 9100
           protocol: "TCP"
-        - name: "mqtt"
-          containerPort: 1883
+        - name: "mqtt-18831"
+          containerPort: 18831
           protocol: "TCP"
         - name: "traefik"
           containerPort: 9000
@@ -2880,7 +2880,7 @@ spec:
           - "--global.checknewversion"
           - "--global.sendanonymoususage"
           - "--entryPoints.metrics.address=:9100/tcp"
-          - "--entryPoints.mqtt.address=:1883/tcp"
+          - "--entryPoints.mqtt-18831.address=:18831/tcp"
           - "--entryPoints.traefik.address=:9000/tcp"
           - "--entryPoints.web.address=:8000/tcp"
           - "--entryPoints.websecure.address=:8443/tcp"

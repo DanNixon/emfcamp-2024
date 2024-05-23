@@ -25,9 +25,9 @@ ports:
     expose:
       default: true
     exposedPort: 443
-  mqtt:
-    port: 1883
+  mqtt-18831:
+    port: 18831
     protocol: TCP
     expose:
       default: true
-    exposedPort: 1883
+    exposedPort: 18831

@@ -1,0 +1,124 @@
+#
+# This is a generated file!
+#
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
+  namespace: schedule-mqtt-announcer
+data:
+  mosquitto.conf: |
+    per_listener_settings true
+
+    log_dest stdout
+    log_type all
+
+    persistence false
+
+    listener 18830
+    protocol mqtt
+    allow_anonymous true
+    acl_file /mosquitto/config/acl-18830.conf
+
+    listener 18831
+    protocol mqtt
+    allow_anonymous true
+    acl_file /mosquitto/config/acl-18831.conf
+
+  acl-18830.conf: |
+    topic readwrite emfcamp/schedule/announce/#
+
+  acl-18831.conf: |
+    topic read emfcamp/schedule/announce/#
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  namespace: schedule-mqtt-announcer
+  labels:
+    app.kubernetes.io/name: mosquitto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mosquitto
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mosquitto
+    spec:
+      volumes:
+        - name: mosquitto-config
+          configMap:
+            name: mosquitto-config
+      containers:
+        - name: mosquitto
+          image: docker.io/library/eclipse-mosquitto:2.0.15
+          volumeMounts:
+            - mountPath: "/mosquitto/config"
+              name: mosquitto-config
+        - name: message-debug
+          image: docker.io/library/eclipse-mosquitto:2.0.15
+          command:
+            - /usr/bin/mosquitto_sub
+            - -h
+            - 127.0.0.1
+            - -p
+            - "18831"
+            - -t
+            - "#"
+            - -v
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqtt-internal-pub
+  namespace: schedule-mqtt-announcer
+spec:
+  selector:
+    app.kubernetes.io/name: mosquitto
+  ports:
+    - name: mqtt
+      protocol: TCP
+      port: 18830
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqtt-external-sub
+  namespace: schedule-mqtt-announcer
+spec:
+  selector:
+    app.kubernetes.io/name: mosquitto
+  ports:
+    - name: mqtt
+      protocol: TCP
+      port: 18831
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mqtt
+  namespace: schedule-mqtt-announcer
+spec:
+  entryPoints:
+    - mqtt-18831
+  routes:
+    - kind: Rule
+      match: HostSNI(`*`)
+      services:
+        - Kind: Service
+          name: mqtt-external-sub
+          port: 18831
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: schedule-mqtt-announcer

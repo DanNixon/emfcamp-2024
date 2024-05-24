@@ -57,6 +57,13 @@ spec:
           volumeMounts:
             - mountPath: "/mosquitto/config"
               name: mosquitto-config
+          ports:
+            - name: mqtt-pub
+              containerPort: 18830
+              protocol: TCP
+            - name: mqtt-sub
+              containerPort: 18831
+              protocol: TCP
         - name: message-debug
           image: docker.io/library/eclipse-mosquitto:2.0.15
           command:

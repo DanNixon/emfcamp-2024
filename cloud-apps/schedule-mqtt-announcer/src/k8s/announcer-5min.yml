@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: announcer-5min
+  namespace: schedule-mqtt-announcer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: announcer-5min
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: announcer-5min
+    spec:
+      containers:
+        - name: announcer
+          image: ghcr.io/dannixon/emfcamp-schedule-mqtt-announcer:6ff4d99a491de8143631288efc0d9a662736e5f1
+          env:
+            - name: RUST_LOG
+              value: debug
+            - name: MQTT_BROKER
+              value: mqtt-internal-pub.schedule-mqtt-announcer.svc.cluster.local
+            - name: MQTT_PORT
+              value: "18830"
+            - name: MQTT_CLIENT_ID
+              value: announcer-5min
+            - name: MQTT_TOPIC_PREFIX
+              value: emfcamp/schedule/announce/5min
+            - name: PRE_EVENT_ANNOUNCEMENT_TIME
+              value: "300"
+            - name: API_URL
+              value: http://http-2024.schedule-api-adapter.svc.cluster.local:8000/schedule
+          ports:
+            - name: metrics
+              containerPort: 9090
+              protocol: TCP

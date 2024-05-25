@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: http
+  namespace: grafana
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`grafana.emfcamp.dan-nixon.com`)
+      services:
+        - Kind: Service
+          name: grafana
+          port: 80
+  tls:
+    secretName: tls-cert

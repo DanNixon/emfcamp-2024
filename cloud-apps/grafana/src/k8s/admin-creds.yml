@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-creds
+  namespace: grafana
+type: Opaque
+stringData:
+  username: "ref+sops://src/secrets.yml#/admin_username"
+  password: "ref+sops://src/secrets.yml#/admin_password"

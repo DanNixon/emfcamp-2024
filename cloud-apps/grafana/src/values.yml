@@ -1,0 +1,20 @@
+# https://github.com/grafana/helm-charts/blob/grafana-7.3.11/charts/grafana/values.yaml
+
+testFramework:
+  enabled: false
+
+admin:
+  existingSecret: admin-creds
+  userKey: username
+  passwordKey: password
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server.monitoring-metrics.svc.cluster.local
+      - name: Loki
+        type: loki
+        url: http://loki.monitoring-logs.svc.cluster.local:3100

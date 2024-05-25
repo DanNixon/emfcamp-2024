@@ -17,6 +17,10 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: announcer-5min
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/"
+        prometheus.io/port: "9090"
     spec:
       containers:
         - name: announcer
@@ -55,6 +59,10 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: announcer-dev
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/"
+        prometheus.io/port: "9090"
     spec:
       containers:
         - name: announcer

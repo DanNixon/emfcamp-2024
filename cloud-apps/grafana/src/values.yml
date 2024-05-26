@@ -18,3 +18,25 @@ datasources:
       - name: Loki
         type: loki
         url: http://loki.monitoring-logs.svc.cluster.local:3100
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: "default"
+        orgId: 1
+        folder: ""
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+
+dashboards:
+  default:
+    announcers:
+      url: https://raw.githubusercontent.com/DanNixon/emfcamp-2024/main/cloud-apps/grafana/dashboards/announcers.json
+    api-adapter:
+      url: https://raw.githubusercontent.com/DanNixon/emfcamp-2024/main/cloud-apps/grafana/dashboards/api-adapter.json
+    dad-joke-hotline:
+      url: https://raw.githubusercontent.com/DanNixon/emfcamp-2024/main/cloud-apps/grafana/dashboards/dad-joke-hotline.json

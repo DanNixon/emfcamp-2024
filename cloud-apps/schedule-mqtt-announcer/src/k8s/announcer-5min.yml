@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: announcer
-          image: ghcr.io/dannixon/emfcamp-schedule-mqtt-announcer:6ff4d99a491de8143631288efc0d9a662736e5f1
+          image: ghcr.io/dannixon/emfcamp-schedule-mqtt-announcer:195b75df7bf6aceebbfa335a1be33a72186aae1c
           env:
             - name: RUST_LOG
               value: debug

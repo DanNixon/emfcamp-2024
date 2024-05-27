@@ -30,3 +30,6 @@ jobs:
         run: |
           eval "$(nix print-dev-env)"
           ./cloud-apps/render_all.sh
+
+      - name: Check committed manifests are up to date
+        run: git diff --exit-code

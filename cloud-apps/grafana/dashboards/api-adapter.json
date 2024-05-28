@@ -106,8 +106,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "rate(emf_schedule_adapter_requests[$__rate_interval])",
+          "editorMode": "code",
+          "expr": "rate(emf_schedule_adapter_requests_total[$__rate_interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,

@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 3,
   "links": [],
   "panels": [
     {
@@ -108,8 +107,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "sum by(from) (dadjokehotline_calls{status=\"Trying\"})",
+          "editorMode": "code",
+          "expr": "sum by(from) (dadjokehotline_calls_total{status=\"Trying\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -208,8 +207,8 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "sum by(status) (rate(dadjokehotline_calls[$__rate_interval]))",
+          "editorMode": "code",
+          "expr": "sum by(status) (rate(dadjokehotline_calls_total[$__rate_interval]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -237,6 +236,6 @@
   "timezone": "browser",
   "title": "Dad Joke Hotline",
   "uid": "cdmvsoaibd5hcf",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }

@@ -40,3 +40,5 @@ dashboards:
       url: https://raw.githubusercontent.com/DanNixon/emfcamp-2024/main/cloud-apps/grafana/dashboards/api-adapter.json
     dad-joke-hotline:
       url: https://raw.githubusercontent.com/DanNixon/emfcamp-2024/main/cloud-apps/grafana/dashboards/dad-joke-hotline.json
+    dial-a-schedule:
+      url: https://raw.githubusercontent.com/DanNixon/emfcamp-2024/main/cloud-apps/grafana/dashboards/dial-a-schedule.json

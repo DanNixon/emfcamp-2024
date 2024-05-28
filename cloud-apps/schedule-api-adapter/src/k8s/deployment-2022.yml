@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: schedule-api-adapter
-          image: ghcr.io/dannixon/emfcamp-schedule-api-adapter:a272fefebcd20c4ceed190f4e0b6344f5c5f6cca
+          image: ghcr.io/dannixon/emfcamp-schedule-api-adapter:a046765c3d309b98e4c017896598b8899f434e5a
           env:
             - name: RUST_LOG
               value: info

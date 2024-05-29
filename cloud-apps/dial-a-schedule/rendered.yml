@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ghcr.io/dannixon/emfcamp-dial-a-schedule:07b208a18ae70986b6ac3af7375091df80d6a526
+          image: ghcr.io/dannixon/emfcamp-dial-a-schedule:695f11bcc2fcde7a477e321960a0b5273411a10f
           env:
             - name: RUST_LOG
               value: info

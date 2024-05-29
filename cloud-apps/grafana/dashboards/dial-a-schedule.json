@@ -308,7 +308,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "dialaschedule_requests_total",
+          "expr": "sum by(namespace, app_kubernetes_io_name, endpoint) (dialaschedule_requests_total)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -350,7 +350,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
+        "w": 7,
         "x": 12,
         "y": 8
       },
@@ -380,7 +380,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "dialaschedule_user_error_total",
+          "expr": "sum(dialaschedule_user_error_total)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -437,7 +437,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},

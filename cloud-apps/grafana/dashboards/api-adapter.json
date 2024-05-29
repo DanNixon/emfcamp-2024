@@ -106,13 +106,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "rate(emf_schedule_adapter_requests_total[$__rate_interval])",
+          "editorMode": "builder",
+          "expr": "sum by(app_kubernetes_io_name, endpoint) (rate(emf_schedule_adapter_requests_total[$__rate_interval]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
           "interval": "1m",
-          "legendFormat": "{{app_kubernetes_io_name}}",
+          "legendFormat": "{{app_kubernetes_io_name}} - {{endpoint}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -202,7 +202,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},

@@ -14,12 +14,19 @@
         pkgs = (import nixpkgs) {
           inherit system;
         };
+
+        nativeBuildInputs = with pkgs; [pkg-config];
+        buildInputs = with pkgs; [systemd];
       in rec {
         devShell = pkgs.mkShell {
+          nativeBuildInputs = nativeBuildInputs;
+          buildInputs = buildInputs;
+
           packages = with pkgs; [
             # Code formatting tools
             treefmt
             alejandra
+            rustfmt
             mdl
 
             # Deployment tools
@@ -29,6 +36,14 @@
             # Secret management
             sops
             vals
+
+            # Rust toolchain
+            cargo
+            rustc
+
+            # Code analysis tools
+            clippy
+            rust-analyzer
           ];
         };
       }

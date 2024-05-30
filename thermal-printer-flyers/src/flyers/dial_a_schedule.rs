@@ -22,7 +22,7 @@ impl PrintableFlyer for DialASchedule {
             .writeln("Telephone")?
             .justify(JustifyMode::CENTER)?
             .size(2, 2)?
-            .writeln("7423 (SCHD/SCHE)")?
+            .writeln("7243 (SCHD/SCHE)")?
             .size(1, 1)?
             .justify(JustifyMode::RIGHT)?
             .writeln("today!")?;

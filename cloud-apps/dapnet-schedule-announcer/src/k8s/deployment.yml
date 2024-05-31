@@ -27,7 +27,7 @@ spec:
             - name: API_URL
               value: http://http-2024.schedule-api-adapter.svc.cluster.local:8000/schedule
             - name: PRE_EVENT_ANNOUNCEMENT_TIME
-              value: "120"
+              value: "300"
             - name: DAPNET_USERNAME
               value: m0nxn
             - name: DAPNET_PASSWORD

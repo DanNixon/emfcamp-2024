@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: announcer
-          image: ghcr.io/dannixon/emfcamp-dapnet-schedule-announcer:d4adde5e0f386e7ca3b91e2f95b6e9312a217b30
+          image: ghcr.io/dannixon/emfcamp-dapnet-schedule-announcer:e71b5b91beafe66fc81713dac7debbfe5146d19d
           env:
             - name: RUST_LOG
               value: info
